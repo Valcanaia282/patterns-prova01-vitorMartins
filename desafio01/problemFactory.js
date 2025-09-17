@@ -16,15 +16,22 @@ class Onibus {
   }
 }
 
-const tipo = "onibus";
-let transporte;
-
-if (tipo === "bicicleta") {
-  transporte = new Bicicleta();
-} else if (tipo === "patinete") {
-  transporte = new Patinete();
-} else if (tipo === "onibus") {
-  transporte = new Onibus();
+class TransporteFactory {
+  static createTransporte(tipo) {
+    switch (tipo.toLowerCase()) {
+      case "bicicleta":
+        return new Bicicleta();
+      case "patinete":
+        return new Patinete();
+      case "onibus":
+        return new Onibus();
+      default:
+        throw new Error("Tipo de transporte desconhecido.");
+    }
+  }
 }
+
+const tipo = "onibus";
+const transporte = TransporteFactory.createTransporte(tipo);
 
 console.log(transporte.move());

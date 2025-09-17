@@ -1,6 +1,10 @@
 class Config {
   constructor() {
+    if (Config.instance) {
+      return Config.instance;
+    }
     this.settings = {};
+    Config.instance = this;
   }
 
   setConfig(key, value) {
@@ -17,3 +21,5 @@ c1.setConfig("lang", "pt-BR");
 
 const c2 = new Config();
 console.log(c2.getConfig("lang"));
+
+console.log(c1 === c2);
